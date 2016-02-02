@@ -1,0 +1,52 @@
+body {
+  background-color: #efeee7;
+  font color: #333333;
+  font-family: Georgia, "Times New Roman", Times,serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container { 
+   width: 1024px;
+   margin: 0 auto;
+
+} 
+
+header {
+  background-color: #d21034;
+}
+
+
+h1 {
+  background-color: #333333;
+  font-size: 28px
+}
+
+h2 {
+  font-size: 24px
+}
+
+#main-bio, #bio-image, #contact-info  {
+  float: left;
+}
+
+#bio-image {
+	width: 200px;
+}
+
+#main-bio {
+	width: 70%;
+}
+
+#contact-info {
+	width: 30%;
+}
+
+p {
+  font-family: ;
+  font-size: 20px;
+}
+
+a {
+	color: #d21034;
+} 
