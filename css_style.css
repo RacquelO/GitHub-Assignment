@@ -1,6 +1,6 @@
 .after::after {
   content: "<----Hi";
-  color: green;
+  color: orange;
 
 }
 
