@@ -1,3 +1,9 @@
+.after::after {
+  content: "<----Hi";
+  color: green;
+
+}
+
 body {
   background-color: #efeee7;
   font color: #333333;
