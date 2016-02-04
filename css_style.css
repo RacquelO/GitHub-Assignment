@@ -1,6 +1,6 @@
 .after::after {
   content: "<----Hi";
-  color: orange;
+  color: green;
 
 }
 
@@ -37,15 +37,15 @@ h2 {
 }
 
 #bio-image {
-  width: 200px;
+	width: 200px;
 }
 
 #main-bio {
-  width: 70%;
+	width: 70%;
 }
 
 #contact-info {
-  width: 30%;
+	width: 30%;
 }
 
 p {
@@ -54,5 +54,5 @@ p {
 }
 
 a {
-  color: #d21034;
+	color: #d21034;
 } 
