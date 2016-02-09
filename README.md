@@ -1,2 +1,2 @@
 # GitHub-Assignment
-Assignment Day 2
+Weekly Assignments
