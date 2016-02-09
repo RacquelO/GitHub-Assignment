@@ -200,3 +200,24 @@ figure:hover figcaption {
 	border-radius: 5px;
 }
 
+
+/*Media Screens*/
+
+@media screen and (max-width: 980px) {
+	
+
+}
+
+@media screen and (max-width: 768px) {
+
+
+}
+
+@media screen and (max-width: 640px) {
+
+	header {
+		position: static;
+	}
+
+}
+
