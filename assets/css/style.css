@@ -338,3 +338,25 @@ input[type=submit] {
 		width: 100%;
 	}
 }
+
+/*Bonus*/
+
+@keyframes example {
+    0%   {background-color: #4aaaa5;}
+    10%  {background-color: white;}
+    100% {background-color: #4aaaa5;}
+}
+
+#logo {
+    background-color: #4aaaa5;
+    animation-name: example;
+    animation-duration: 3s;
+}
+
+
+
+
+
+
+
+
