@@ -7,10 +7,21 @@ body {
 }
 
 * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 /*general*/
+
+
+img:hover  {
+  -ms-transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+  transform: rotate(-10deg);
+}
 
 
 .container {
@@ -58,12 +69,12 @@ h3 {
 }
 #logo {
 	width: 250px;
-	height: 90px;
+	height: 80px;
 	background: #4aaaa5;
 	float: left;
 	font-family: 'Georgia', Times, Times New Roman, serif;
 	text-align: center;
-	line-height: 90px;
+	line-height: 80px;
 	color: #fff;
 	font-weight: 700;
 	font-size: 30px;
@@ -99,6 +110,23 @@ footer {
 	text-align: center;
 }
 
+* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -4em;
+}
+footer {
+height: 8em;
+}
+
+
 /*sidebar*/
 
 .sidebar {
@@ -123,6 +151,11 @@ h3,
 	margin-top: 8px;
 	margin-right: 5px;
 }
+
+.stack{
+	padding: 3px;
+}
+
 .social:last-child {
 	margin-right: 0;
 }
@@ -213,4 +246,95 @@ input[type=submit] {
 	font-size: 18px;
 	padding: 10px 30px;
 	cursor: pointer;
+}
+
+
+/*media queries*/
+
+@media screen and (max-width: 980px) {
+	.main-section {
+    	width: 60%;
+    }
+    .container{
+    	width: 83%;
+    }
+    .auth-image {
+    width: 100%;
+    padding-bottom: 20px;
+	}	
+	.work {
+	width: 100%;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.container{
+    	width: 98%;
+    	padding-right: 10px;
+    }
+    .main-section {
+    	width: 100%;
+    }
+    .auth-image {
+    	width: 50%;
+	}
+	.main-section {
+		max-width: 100%;
+		float: right;
+	}
+	.sidebar {
+		max-width: 100%;
+	}
+	.work {
+		width: 46%;
+	}
+
+	.work:nth-child(even) {
+    margin-right: 50px;
+	}
+}
+
+@media screen and (max-width: 640px) {
+    header {
+    	position: static;
+    }
+    .container{
+    	width: 100%;
+    	padding-right: 0px;
+    	padding-left: 0px;
+    }
+
+    #logo {
+	width: 100%;
+	position: static;
+	}
+
+	nav {
+    float: none;
+    position: static;
+    text-align: center;
+    line-height: 3;
+	}
+
+	nav a {
+	position: static;
+	display: inline-block;
+    width: 25%;
+	}
+
+	#masthead {
+    position: static;
+	}
+
+	#main-container {
+    padding-top: 0px;
+	}
+
+	.auth-image {
+    	width: 100%;
+    }
+
+    .work {
+		width: 100%;
+	}
 }
