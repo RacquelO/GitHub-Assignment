@@ -1,0 +1,42 @@
+/*vendor prefixes*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/greek-mythology.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+
+@font-face {
+  font-family: "custom font"; 
+  src: url("../images/greek.ttf") format("truetype");
+}
+
+.jumbotron {
+    text-align: center; 
+    padding-top: 1px;
+    padding-bottom: 3px;
+    margin-bottom: 1px;
+    opacity: .85;
+    width: 60%;
+    margin: auto;
+} 
+
+p,h1,h2,h3,h4,h5{
+  font-family: "custom font";
+}
+
+
+
+
+
+
+
+
+

@@ -1,235 +1,235 @@
-window.onload = function () {
+// global variables
+//==========================
+var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var wordOptions = ["Achelous", "Adonis", "Adrestia", "Aeolus", "Aether", "Agathodaemon", "Aglaea", "Algea", "Alpheus", "Amphitrite", "Ananke", "Androktasiai", "Anemoi", "Anteros", "Apate",  "Aristaeus", "Asclepius", "Asopus","Astraea", "Ate", "Atropos", "Aura", "Bia", "Britomartis", "Caerus", "Calypso", "Castalia", "Cephissus", "Chaos", "Chronos", "Circe", "Clotho", "Clytie", "Daphne", "Deimos", "Demeter", "Dionysus", "Dysnomia", "Echo", "Eileithyia", "Eirene", "Elpis", "Endeis", "Enyo", "Erebus", "Eris", "Eros", "Euphrosyne", "Gaea", "Geras", "Graeae", "Harmonia", "Hebe", "Hecate", "Heliadae", "Heliades", "Helios", "Hemera", "Hermaphroditus", "Hesperides", "Hesperus", "Horae", "Horkos", "Hyades", "Hyas", "Hygeia", "Hypnos", "Iasion", "Iris", "Keres", "Keto", "Kratos", "Lachesis", "Lethe", "Limos", "Lyssa", "Makhai", "Maniae", "Melinoe", "Minor", "Gods", "Momus", "Moros", "Morpheus", "Nemesis", "Nephele", "Nike", "Nilus", "Nysiads", "Nyx", "Oenone", "Oizys", "Oneiroi", "Ourea", "Paean",  "Pan", "Persephone", "Pheme", "Philotes","Phobos", "Phonoi", "Phorcys", "Phosphorus", "Phthonus", "Ploutos", "Ponos", "Pontus", "Primordial", "Pseudologoi", "Psyche", "Rhode", "Scamander", "Syrinx", "Tartarus", "Telesto", "Thalassa", "Thalia", "Thanatos", "Thaumas", "Thetis", "Tyche", "Typhoeus", "Uranus", "Zagreus", "Zelus" ];
+var selectedWord = "";
+var lettersinWord = [];
+var numBlanks = 0;
+var blanksAndSuccesses = [];
+var wrongLetters = [];
 
-  var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-        'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-        't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  
-  var categories;         // Array of topics
-  var chosenCategory;     // Selected catagory
-  var getHint ;          // Word getHint
-  var word ;              // Selected word
-  var guess ;             // Geuss
-  var geusses = [ ];      // Stored geusses
-  var lives ;             // Lives
-  var counter ;           // Count correct geusses
-  var space;              // Number of spaces in word '-'
+// test the variables
+console.log(alphabet + ' ' + wordOptions);
 
-  // Get elements
-  var showLives = document.getElementById("mylives");
-  var showCatagory = document.getElementById("scatagory");
-  var getHint = document.getElementById("hint");
-  var showClue = document.getElementById("clue");
+//game counter
+var winCount = 0;
+var lossCount = 0;
+var guessesLeft = 9;
 
+//functions
+//==========================
+function startGame () {
+	selectedWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+	lettersinWord = selectedWord.split("");
+	numBlanks = lettersinWord.length;
 
+	//Reset
+	guessesLeft = 9;
+	wrongLetters = [];
+	blanksAndSuccesses = [];
 
-  // create alphabet ul
-  var buttons = function () {
-    myButtons = document.getElementById('buttons');
-    letters = document.createElement('ul');
+	//populate blanks and successes
+	for (var i=0; i<numBlanks; i++){
+		blanksAndSuccesses.push("_");
+	}
+	
+	//change html to reflect round conditions
+	document.getElementById("word-display").innerHTML= blanksAndSuccesses.join(" ");
+	document.getElementById("guessesLeft").innerHTML = guessesLeft;
+	document.getElementById("win-counter").innerHTML = winCount;
+	document.getElementById("loss-counter").innerHTML = lossCount;
 
-    for (var i = 0; i < alphabet.length; i++) {
-      letters.id = 'alphabet';
-      list = document.createElement('li');
-      list.id = 'letter';
-      list.innerHTML = alphabet[i];
-      check();
-      myButtons.appendChild(letters);
-      letters.appendChild(list);
-    }
-  }
-    
-  
-  // Select Catagory
-  var selectCat = function () {
-    if (chosenCategory === categories[0]) {
-      catagoryName.innerHTML = "The Chosen Category Is Premier League Football Teams";
-    } else if (chosenCategory === categories[1]) {
-      catagoryName.innerHTML = "The Chosen Category Is Films";
-    } else if (chosenCategory === categories[2]) {
-      catagoryName.innerHTML = "The Chosen Category Is Cities";
-    }
-  }
+	//test function
+	console.log(selectedWord);
+	console.log(lettersinWord);
+	console.log(numBlanks);
+	console.log(blanksAndSuccesses);
 
-  // Create geusses ul
-   result = function () {
-    wordHolder = document.getElementById('hold');
-    correct = document.createElement('ul');
-
-    for (var i = 0; i < word.length; i++) {
-      correct.setAttribute('id', 'my-word');
-      guess = document.createElement('li');
-      guess.setAttribute('class', 'guess');
-      if (word[i] === "-") {
-        guess.innerHTML = "-";
-        space = 1;
-      } else {
-        guess.innerHTML = "_";
-      }
-
-      geusses.push(guess);
-      wordHolder.appendChild(correct);
-      correct.appendChild(guess);
-    }
-  }
-  
-  // Show lives
-   comments = function () {
-    showLives.innerHTML = "You have " + lives + " lives";
-    if (lives < 1) {
-      showLives.innerHTML = "Game Over";
-    }
-    for (var i = 0; i < geusses.length; i++) {
-      if (counter + space === geusses.length) {
-        showLives.innerHTML = "You Win!";
-      }
-    }
-  }
-
-      // Animate man
-  var animate = function () {
-    var drawMe = lives ;
-    drawArray[drawMe]();
-  }
-
-  
-   // Hangman
-  canvas =  function(){
-
-    myStickman = document.getElementById("stickman");
-    context = myStickman.getContext('2d');
-    context.beginPath();
-    context.strokeStyle = "#fff";
-    context.lineWidth = 2;
-  };
-  
-    head = function(){
-      myStickman = document.getElementById("stickman");
-      context = myStickman.getContext('2d');
-      context.beginPath();
-      context.arc(60, 25, 10, 0, Math.PI*2, true);
-      context.stroke();
-    }
-    
-  draw = function($pathFromx, $pathFromy, $pathTox, $pathToy) {
-    
-    context.moveTo($pathFromx, $pathFromy);
-    context.lineTo($pathTox, $pathToy);
-    context.stroke(); 
 }
 
-   frame1 = function() {
-     draw (0, 150, 150, 150);
-   };
-   
-   frame2 = function() {
-     draw (10, 0, 10, 600);
-   };
-  
-   frame3 = function() {
-     draw (0, 5, 70, 5);
-   };
-  
-   frame4 = function() {
-     draw (60, 5, 60, 15);
-   };
-  
-   torso = function() {
-     draw (60, 36, 60, 70);
-   };
-  
-   rightArm = function() {
-     draw (60, 46, 100, 50);
-   };
-  
-   leftArm = function() {
-     draw (60, 46, 20, 50);
-   };
-  
-   rightLeg = function() {
-     draw (60, 70, 100, 100);
-   };
-  
-   leftLeg = function() {
-     draw (60, 70, 20, 100);
-   };
-  
-  drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
+function checkLetters(letter) {
+	//check if letter exists in code
+	var isLetterInWord = false;
+	for (var i=0; i<numBlanks; i++){
 
+	}
+}
 
-  // OnClick Function
-   check = function () {
-    list.onclick = function () {
-      var geuss = (this.innerHTML);
-      this.setAttribute("class", "active");
-      this.onclick = null;
-      for (var i = 0; i < word.length; i++) {
-        if (word[i] === geuss) {
-          geusses[i].innerHTML = geuss;
-          counter += 1;
-        } 
-      }
-      var j = (word.indexOf(geuss));
-      if (j === -1) {
-        lives -= 1;
-        comments();
-        animate();
-      } else {
-        comments();
-      }
-    }
-  }
-  
-    
-  // Play
-  play = function () {
-    categories = [
-        ["everton", "liverpool", "swansea", "chelsea", "hull", "manchester-city", "newcastle-united"],
-        ["alien", "dirty-harry", "gladiator", "finding-nemo", "jaws"],
-        ["manchester", "milan", "madrid", "amsterdam", "prague"]
-    ];
+//main process
+//==========================
 
-    chosenCategory = categories[Math.floor(Math.random() * categories.length)];
-    word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)];
-    word = word.replace(/\s/g, "-");
-    console.log(word);
-    buttons();
+//starts the first game
+startGame();
 
-    geusses = [ ];
-    lives = 10;
-    counter = 0;
-    space = 0;
-    result();
-    comments();
-    selectCat();
-    canvas();
-  }
-
-  play();
-  
-  // Hint
-
-    hint.onclick = function() {
-
-      hints = [
-        ["Based in Mersyside", "Based in Mersyside", "First Welsh team to reach the Premier Leauge", "Owned by A russian Billionaire", "Once managed by Phil Brown", "2013 FA Cup runners up", "Gazza's first club"],
-        ["Science-Fiction horror film", "1971 American action film", "Historical drama", "Anamated Fish", "Giant great white shark"],
-        ["Northern city in the UK", "Home of AC and Inter", "Spanish capital", "Netherlands capital", "Czech Republic capital"]
-    ];
-
-    var catagoryIndex = categories.indexOf(chosenCategory);
-    var hintIndex = chosenCategory.indexOf(word);
-    showClue.innerHTML = "Clue: - " +  hints [catagoryIndex][hintIndex];
-  };
-
-   // Reset
-
-  document.getElementById('reset').onclick = function() {
-    correct.parentNode.removeChild(correct);
-    letters.parentNode.removeChild(letters);
-    showClue.innerHTML = "";
-    context.clearRect(0, 0, 400, 400);
-    play();
-  }
+//register keyclicks
+document.onkeyup = function(event) {
+	var letterGuessed = String.fromCharCode(event.keyCode).toLowerCase();
+	console.log(letterGuessed);
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // checking letter input
+// function letInput(letter){
+// 	if (alphabet.indexOf(letter) != -1){
+// 		return true;
+// 	}
+// }
+
+// //
+// var game = {
+
+// 	// counters and containers
+// 	guesses : 0,
+// 	wins : 0,
+// 	usedKeys : [],
+// 	display : [],
+// 	word : Object,
+
+// 	// HTML updates
+// 	winCounter : function() {
+// 		document.querySelector("#win-counter").innerHTML = 
+// 			"<p>Games Won: </p> " +
+// 			"<p class='counter'>" + this.wins + "</p>";
+// 	},
+// 	guessCounter : function() {
+// 		document.querySelector("#guess-counter").innerHTML = 
+// 			"<p>Guesses Remaining: </p>" + 
+// 			"<p class='counter'>" + this.guesses + "</p>";
+// 	},
+// 	usedKeysCounter : function() {
+// 		document.querySelector("#letters-guessed").innerHTML = 
+// 			"<p>Letters Guessed: <p> " +
+// 			"<p class='counter'>" + this.usedKeys.join(", ") + "</p>";
+// 	},
+// 	wordDisplay : function() {
+// 		document.querySelector("#word-display").innerHTML = 
+// 			"<p>" + this.display.join(" ") + "</p>";
+// 	},
+// 	victory : function() {
+// 		document.querySelector("#consequence").innerHTML = 
+// 			"<h3>Victory!</h3>" +
+// 			"<p class='win-word'>" + this.wordsList.name + "</p>";
+// 	},
+// 	defeat : function() {
+// 		document.querySelector("#consequence").innerHTML = 
+// 			"<h3>Defeated!</h3>" +
+// 			"<p class='lose-word'>The word was " + this.word.name + "...</p>";
+// 	},
+
+// 	// Play sound of word
+// 	playWin : function() {
+// 		var audio = new Audio(this.word.sound);
+// 		audio.play();
+// 	},
+// 	playLose : function () {
+// 		var audio = new Audio("assets/sounds/wrong.mp3");
+// 		audio.play();
+// 	},
+
+// 	// start game
+// 	start : function() {
+// 		// set default values
+// 		this.guesses = 12;
+// 		this.display = [];
+// 		this.usedKeys = [];
+
+// 		// set up display ( _ _ _ _ _ _ )
+// 		this.word = dictionary[ Math.floor(Math.random() * dictionary.length) ];
+// 		for (var i = 0; i < this.word.name.length; i++){
+// 			this.display.push("_");
+// 		}
+
+// 		// refresh the HTML
+// 		this.winCounter();
+// 		this.guessCounter();
+// 		this.wordDisplay();
+// 		this.usedKeysCounter();
+// 	},
+
+// 	// input
+// 	input : function(lett) {
+// 		// verify a valid, unused key was pressed
+// 		if( letInput(lett) && this.usedKeys.indexOf(lett) === -1) {
+
+// 			// checker switch: turns true if a match is found
+// 			checker = false;
+
+// 			// if valid, check against the Word.name
+// 			for (var i = 0; i < this.word.name.length; i++) {
+
+// 				// if there's a match, replace a '_' in game.display
+// 				if (lett === this.word.name[i]) {
+// 					this.display[i] = lett;
+// 					checker = true;
+// 				}
+// 			}
+
+// 			// if checker's still false, take a guess point away
+// 			if (!checker) {
+// 				this.guesses--;
+// 			}
+
+// 			// add key to used keys array, sort it alphabetically
+// 			this.usedKeys.push(lett);
+// 			this.usedKeys.sort();
+
+// 			// update the HTML
+// 					this.winCounter();
+// 					this.guessCounter();
+// 					this.wordDisplay();
+// 					this.usedKeysCounter();
+
+// 			/* Win Condition (!!!):
+// 			 * no more '_'s in game.display
+// 			 */
+// 			if (this.display.indexOf('_') === -1){
+// 				this.wins++;
+// 				this.victory();
+// 				this.playWin();
+// 				this.start();
+// 			}
+
+// 			/* Lose Condition (!!!):
+// 			 * no more guesses left
+// 			 */
+// 			if (this.guesses <= 0) {
+// 				this.defeat();
+// 				this.playLose();
+// 				this.start();
+// 			}
+// 		}
+// 	}
+// }
+
+// // onload event
+// document.onLoad = game.start();
+
+// // onkeyup events
+// document.onkeyup = function(event){
+// 	var letter = String.fromCharCode(event.keyCode).toLowerCase();
+// 	game.input(letter);
+// }

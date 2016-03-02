@@ -1,0 +1,47 @@
+/*vendor prefixes*/
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../images/trivia.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.jumbotron {
+    text-align: center; 
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 1px;
+    opacity:;
+    width: 60%;
+    margin: auto;
+    background-color: #fdd;
+} 
+
+/*footer*/
+
+footer {
+  background:#fdd;
+  color:;
+  padding: 10px 0;
+  clear: both;
+  border-top: 5px solid;
+  color:;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
