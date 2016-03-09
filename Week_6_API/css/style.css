@@ -1,0 +1,29 @@
+
+
+
+body {
+	background-image: url("../images/funny.jpg");
+	background-size: 1300px;
+	float: center;
+	padding-right: 0;
+
+
+}
+
+label {
+	color: black;
+	font-weight: bold;
+}
+
+
+h1 {
+	font-weight: bold;
+	font-size: 50px;
+	background-color: clear;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
+	width: 100%
+}
+ 
+
+

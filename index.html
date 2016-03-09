@@ -1,44 +1,50 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="TriviaGame/assets/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="TriviaGame/assets/css/style.css">
-	<title>Trivia Game | Racquel Ovadia</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans"/>
+		<link rel="stylesheet" type="text/css" href="Week_6_API/css/reset.css">
+		<link rel="stylesheet" type="text/css" href="Week_6_API/css/style.css">
+	
+	
+
+	<title>Meow Giphy</title>
 </head>
+
 <body>
-  <div class="container">	
-  	<div class="jumbotron">		
-      <h1>Trivia Game</h1>
-  		<h2>See How Much You Know</h2>
-  	</div>
-    <br>
-    <br>
-
-  	<div class="jumbotron">
-      <h1>Start</h1>
-    </div>
-    <br>
-    <br>
-
-    <div class="jumbotron">    
-    </div>
-  </div>
-   <br>
-   <br>
 
 
-	<footer>
-		<div class="container">
-			&copy; Copyright 2016 Racquel Ovadia
-		</div>
-	</footer>
+	<div class="container">
 
-  <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
-  <script type="text/javascript" src="TriviaGame/assets/javascript/app.js"></script>
+	 <h1>Meow Giphy</h1>
+
+	
+	<div id="meowButtons"></div>
+		
+	
+	<form id="meow-form">
+		<label for="meowInput">Add an meow</label>
+		<input type="text" id="meowInput">
+		<br>
+		<input id="addmeow" type="submit" value="submit">
+	</form>
+
+	<div id="meows"></div>
+	</div>
+
+
+	<!-- Jquery -->
+	<script src="Week_6_API/javascript/jquery-1.12.1.min.js"></script>
+	<!-- Bootstrap compiled and minified Javascript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- Javascript -->
+	<script src = "Week_6_API/javascript/giphy.js"></script>
+
 </body>
 </html>
+
 
 
