@@ -1,50 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans"/>
-		<link rel="stylesheet" type="text/css" href="Week_6_API/css/reset.css">
-		<link rel="stylesheet" type="text/css" href="Week_6_API/css/style.css">
-	
-	
+	<meta charset="UTF-8">
+	<title>Two Player Rock Paper Scissor</title>
 
-	<title>Meow Giphy</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- reset.css -->
+	<link rel="stylesheet" type="text/css" href="week_7_rockpaperscissor/assets/css/reset.css">
+
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="week_7_rockpaperscissor/assets/css/style.css">
+	
+	<!-- LINK TO FIREBASE GOES HERE -->
+	<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+
 </head>
-
 <body>
 
+<div class="container">
+	<br>
+	<!-- Jumbotron -->
+	<div class="jumbotron">
+		<h1 class="text-center">Rock Paper Scissor</h1>
+	</div>
 
-	<div class="container">
+ <!-- form/submit name -->
+<form class="form-inline" align="center">
+  <div class="form-group">
+    <input type="text" class="form-control" id="nameInput" placeholder="Name">
+  </div>
+  <button type="submit" class="btn btn-primary" id="startButton">Start</button>
+</form>
 
-	 <h1>Meow Giphy</h1>
+  <!-- Columns -->
+	<div class="row">
+    <div class="col-md-4">
+      <div class="panel">
+        <p id="playerOneName"></p>
+        <br><br>
+        <button id="playerOneRock"></button>
+        <br><br>
+        <button id="playerOnePaper"></button>
+        <br><br>
+        <button id="playerOneScissor"></button>
+        <br><br><br>
+        <span id="playerOneWins"></span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span id="playerOneLosses"></span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel">
+        <p id="winner"></p>
+        <br><br>
+        <p id="">RPS</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel">
+        <p id="playerTwoName"></p>
+        <br><br>
+        <button id="playerTwoRock"></button>
+        <br><br>
+        <button id="playerTwoPaper"></button>
+        <br><br>
+        <button id="playerTwoScissor"></button>
+        <br><br><br>
+        <span id="playerTwoWins"></span><span>&nbsp;&nbsp;|&nbsp;&nbsp;</span><span id="playerTwoLosses"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
+
+  
 	
-	<div id="meowButtons"></div>
-		
-	
-	<form id="meow-form">
-		<label for="meowInput">Add an meow</label>
-		<input type="text" id="meowInput">
-		<br>
-		<input id="addmeow" type="submit" value="submit">
-	</form>
+	<!-- <div class="row">
 
-	<div id="meows"></div>
+		<! Sign-Up Panel-->
+		<!-- <div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">New Member Sign-Up</h3>
+				</div>
+				<div class="panel-body"> -->
+					
+					<!-- Sign-up Form (note the various input "types")-->
+					<!-- <form role="form">
+					  <div class="form-group">
+					    <label for="text">Name:</label>
+					    <input type="text" class="form-control" id="nameinput">
+					  </div>
+					  <div class="form-group">
+					    <label for="text">Email:</label>
+					    <input type="email" class="form-control" id="emailinput">
+					  </div>
+					  <div class="form-group">
+					    <label for="text">Age:</label>
+					    <input type="number" class="form-control" id="ageinput">
+					  </div>
+					  <div class="form-group">
+						 <label for="comment">How did you hear about us?</label>
+						 <textarea class="form-control" rows="5" id="commentinput"></textarea>
+					   </div>
+					  <button type="submit" class="btn btn-default" id="addUser">Submit</button>
+					</form>
+
+				</div>
+			</div>
+		</div>
+
+		<! Most Recent Member Panel -->
+		<!-- <div class="col-lg-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Most Recent Member</h3>
+				</div>
+				<div class="panel-body" id="recentMember">
+					<h2 id="namedisplay"></h2>
+					<h4 id="emaildisplay"></h4>
+					<h4 id="agedisplay"></h4>
+					<p id="commentdisplay"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!-- CHAT MARKUP -->
+  <div class="rockPaperScissorChat" id="chatContainer">
+	  <header class="well">Rock Paper Scissor Chat</header>
+	  <div class='rockPaperScissorChatToolbar'>
+      <br>
+	    <label for="nameInput2">Username:</label>
+	    <input type='text' id='nameChatInput' placeholder='enter a username...'>
+	  <ul id='examplechatMessages' class="examplechatMessages"></ul>
+    <br><br><br><br><br><br><br><br>
+	  <footer>
+	    <input type='text' id='messageInput' placeholder='Type a message...'>
+      <br><br>
+	  </footer>
 	</div>
 
 
-	<!-- Jquery -->
-	<script src="Week_6_API/javascript/jquery-1.12.1.min.js"></script>
-	<!-- Bootstrap compiled and minified Javascript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<!-- Javascript -->
-	<script src = "Week_6_API/javascript/giphy.js"></script>
+<!-- Latest compiled and minified CSS & JS -->
+<script src="https://code.jquery.com/jquery.js"></script>
 
+<script src="week_7_rockpaperscissor/assets/javascript/racquels_rockpaperscissor.js"> </script>
+	
 </body>
 </html>
-
-
-
