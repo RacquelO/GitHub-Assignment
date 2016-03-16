@@ -27,7 +27,7 @@ var playerTwo = {
 // };
 
 
-dataRef.set({
+dataRef.push({
       playerOneData: playerOne,
       playerTwoData: playerTwo,
       // chatOne: chatOne,
@@ -36,35 +36,36 @@ dataRef.set({
 
 console.log(dataRef);
 
-dataRef.on("value", function(snapshot) {
+dataRef.on("child_added", function(childSnapshot){
 
-  // If Firebase has a playerOneData and playerTwoData stored (first case)
-  if (snapshot.child("playerOneData").exists() && snapshot.child("playerTwoData").exists()) {
+
+  // // If Firebase has a playerOneData and playerTwoData stored (first case)
+  // if (childSnapshot.child("playerOneData").exists() && childSnapshot.child("playerTwoData").exists()) {
 
     // Set the initial variables equal to the stored values.
-    playerOneData = snapshot.val().playerOneData;
-    playerTwoData = snapshot.val().playerTwoData;
+    playerOneData = childSnapshot.val().playerOneData;
+    playerTwoData = childSnapshot.val().playerTwoData;
 
     // Change the HTML to reflect the initial value
-    $('#playerOneName').html(snapshot.val().playerOneData.name);
-    $('#playerOneRock').html(snapshot.val().playerOneData.choice[0]);
-    $('#playerOnePaper').html(snapshot.val().playerOneData.choice[1]);
-    $('#playerOneScissor').html(snapshot.val().playerOneData.choice[2]);
-    $('#playerOneLosses').html("Losses:" + " " + snapshot.val().playerOneData.losses);
-    $('#playerOneWins').html("Wins:" + " " + snapshot.val().playerOneData.wins);
+    $('#playerOneName').html(childSnapshot.val().playerOneData.name);
+    $('#playerOneRock').html(childSnapshot.val().playerOneData.choice[0]);
+    $('#playerOnePaper').html(childSnapshot.val().playerOneData.choice[1]);
+    $('#playerOneScissor').html(childSnapshot.val().playerOneData.choice[2]);
+    $('#playerOneLosses').html("Losses:" + " " + childSnapshot.val().playerOneData.losses);
+    $('#playerOneWins').html("Wins:" + " " + childSnapshot.val().playerOneData.wins);
 
-    $('#playerTwoName').html(snapshot.val().playerTwoData.name);
-    $('#playerTwoRock').html(snapshot.val().playerOneData.choice[0]);
-    $('#playerTwoPaper').html(snapshot.val().playerOneData.choice[1]);
-    $('#playerTwoScissor').html(snapshot.val().playerOneData.choice[2]);
-    $('#playerTwoLosses').html("Losses:" + " " + snapshot.val().playerTwoData.losses);
-    $('#playerTwoWins').html("Wins:" + " " + snapshot.val().playerTwoData.wins);
+    $('#playerTwoName').html(childSnapshot.val().playerTwoData.name);
+    $('#playerTwoRock').html(childSnapshot.val().playerOneData.choice[0]);
+    $('#playerTwoPaper').html(childSnapshot.val().playerOneData.choice[1]);
+    $('#playerTwoScissor').html(childSnapshot.val().playerOneData.choice[2]);
+    $('#playerTwoLosses').html("Losses:" + " " + childSnapshot.val().playerTwoData.losses);
+    $('#playerTwoWins').html("Wins:" + " " + childSnapshot.val().playerTwoData.wins);
 
 
     // Print the initial data to the console.
     console.log(playerOneData);
     console.log(playerTwoData)
-  }
+  // }
 
 // Keep the initial variables for highBidder equal to the initial values
   // else{
@@ -99,9 +100,9 @@ $("#startButton").on("click", function() {
 
   $("#playerOneName").html(playerOneName);
 
-  dataRef.update({
-      playerOneData
-    });
+  // dataRef.update({
+  //     playerOneData
+  //   });
 
 
 //   var hopperRef = usersRef.child("gracehop");
@@ -237,9 +238,9 @@ $("#startButton").on("click", function() {
   });
 
   // Add a callback that is triggered for each chat message.
-  dataRef.limitToLast(100).on('child_added', function (snapshot) {
+  dataRef.limitToLast(100).on('child_added', function (childSnapshot) {
     //GET DATA
-    var data = snapshot.val();
+    var data = childSnapshot.val();
     var username = data.chatName;
     var message = data.text;
 
@@ -274,23 +275,23 @@ $("#startButton").on("click", function() {
 
 
 // //Firebase watcher + initial loader HINT: .on("value")
-// dataRef.on("value", function(snapshot) {
+// dataRef.on("value", function(childSnapshot) {
 
 //   // Change the HTML to reflect
 
-//     $('#playerOneName').html(snapshot.val().playerOneData.name);
-//     $('#playerOneRock').html(snapshot.val().playerOneData.choice[0]);
-//     $('#playerOnePaper').html(snapshot.val().playerOneData.choice[1]);
-//     $('#playerOneScissor').html(snapshot.val().playerOneData.choice[2]);
-//     $('#playerOneLosses').html("Losses:" + " " + snapshot.val().playerOneData.losses);
-//     $('#playerOneWins').html("Wins:" + " " + snapshot.val().playerOneData.wins);
+//     $('#playerOneName').html(childSnapshot.val().playerOneData.name);
+//     $('#playerOneRock').html(childSnapshot.val().playerOneData.choice[0]);
+//     $('#playerOnePaper').html(childSnapshot.val().playerOneData.choice[1]);
+//     $('#playerOneScissor').html(childSnapshot.val().playerOneData.choice[2]);
+//     $('#playerOneLosses').html("Losses:" + " " + childSnapshot.val().playerOneData.losses);
+//     $('#playerOneWins').html("Wins:" + " " + childSnapshot.val().playerOneData.wins);
 
-//     $('#playerTwoName').html(snapshot.val().playerTwoData.name);
-//     $('#playerTwoRock').html(snapshot.val().playerOneData.choice[0]);
-//     $('#playerTwoPaper').html(snapshot.val().playerOneData.choice[1]);
-//     $('#playerTwoScissor').html(snapshot.val().playerOneData.choice[2]);
-//     $('#playerTwoLosses').html("Losses:" + " " + snapshot.val().playerTwoData.losses);
-//     $('#playerTwoWins').html("Wins:" + " " + snapshot.val().playerTwoData.wins);
+//     $('#playerTwoName').html(childSnapshot.val().playerTwoData.name);
+//     $('#playerTwoRock').html(childSnapshot.val().playerOneData.choice[0]);
+//     $('#playerTwoPaper').html(childSnapshot.val().playerOneData.choice[1]);
+//     $('#playerTwoScissor').html(childSnapshot.val().playerOneData.choice[2]);
+//     $('#playerTwoLosses').html("Losses:" + " " + childSnapshot.val().playerTwoData.losses);
+//     $('#playerTwoWins').html("Wins:" + " " + childSnapshot.val().playerTwoData.wins);
 
 //   }
 
@@ -375,20 +376,20 @@ $("#startButton").on("click", function() {
 // });
 
 // //Firebase watcher + initial loader HINT: .on("value")
-// dataRef.on("value", function(snapshot) {
+// dataRef.on("value", function(childSnapshot) {
 
-// 	// Log everything that's coming out of snapshot
-// 	console.log(snapshot.val());
-// 	console.log(snapshot.val().name);
-// 	console.log(snapshot.val().email);
-// 	console.log(snapshot.val().age);
-// 	console.log(snapshot.val().comment);
+// 	// Log everything that's coming out of childSnapshot
+// 	console.log(childSnapshot.val());
+// 	console.log(childSnapshot.val().name);
+// 	console.log(childSnapshot.val().email);
+// 	console.log(childSnapshot.val().age);
+// 	console.log(childSnapshot.val().comment);
 
 // 	// Change the HTML to reflect
-// 	$("#namedisplay").html(snapshot.val().name);
-// 	$("#emaildisplay").html(snapshot.val().email);
-// 	$("#agedisplay").html(snapshot.val().age);
-// 	$("#commentdisplay").html(snapshot.val().comment);
+// 	$("#namedisplay").html(childSnapshot.val().name);
+// 	$("#emaildisplay").html(childSnapshot.val().email);
+// 	$("#agedisplay").html(childSnapshot.val().age);
+// 	$("#commentdisplay").html(childSnapshot.val().comment);
 
 // // Handle the errors
 // }, function(errorObject){
