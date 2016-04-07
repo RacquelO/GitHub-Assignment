@@ -9,6 +9,10 @@
 	opacity: .9;
 }
 
+h1,h2{
+  opacity: .5;
+}
+
 body {
 	background-image: url("../images/rock-paper-scissors-2-1241086.jpg");
 	background-repeat: no-repeat;

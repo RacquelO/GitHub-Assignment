@@ -1,1 +1,1 @@
-<?php include_once ("train.html"); ?>
+<?php include_once ("index.html"); ?>
